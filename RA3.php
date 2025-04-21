@@ -1,106 +1,110 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica Arrays PHP</title>
+</head>
 <body>
 
 <?php
-
-echo '<h1>Ejercicio 1</h1>';
-$valors = array("Dato 1º"=>"Ana", "Dato 2º"=>"Martinez", "Dato 3º"=>"23", "Dato 4º"=>"Barcelona");
-foreach ($valors as $x => $y) {
-    echo "$x: $y <br>";
+// EJERCICIO 1
+echo '<h2>Ejercicio 1</h2>';
+$valors = array("nombre" => "Sara", "apellido" => "Martínez", "edad" => 23, "ciudad" => "Barcelona");
+foreach ($valors as $valor) {
+    echo $valor;
+    echo "<br>";
 }
+echo "<hr>";
 
-echo '<h1>Ejercicio 2</h1>';
-    $valors = array("Nombre"=>"Ana", "Apellido"=>"Martinez", "Edad"=>"23", "Poblacion"=>"Barcelona");
-    foreach ($valors as $x => $y) {
-        echo "$x: $y <br>";
+// EJERCICIO 2
+echo '<h2>Ejercicio 2</h2>';
+foreach ($valors as $clave => $valor) {
+    echo "$clave: $valor<br>";
 }
+echo "<hr>";
 
-echo '<h1 >Ejercicio 3</h1>';
-$valors ["Edad"]= 24;
-foreach ($valors as $key => $values) {
-    echo "$key: $values <br>";
+// EJERCICIO 3
+echo '<h2>Ejercicio 3</h2>';
+$valors["edad"] = 24;
+foreach ($valors as $clave => $valor) {
+    echo "$clave: $valor<br>";
 }
+echo "<hr>";
 
-echo '<h1>Ejercicio 4</h1>';
-$valors = array("Nombre"=>"Sara", "Apellido"=>"Martinez", "Edad"=>"24");
+// EJERCICIO 4
+echo '<h2>Ejercicio 4</h2>';
+unset($valors["ciudad"]);
 var_dump($valors);
+echo "<hr>";
 
-
-
-echo '<h1>Ejercicio 5</h1>';
+// EJERCICIO 5
+echo '<h2>Ejercicio 5</h2>';
 $letters = "a,b,c,d,e,f";
-
 $array_letters = explode(",", $letters);
 rsort($array_letters);
 foreach ($array_letters as $letter) {
-    echo $letter . "\n";
+    echo $letter;
+    echo "<br>";
 }
+echo "<hr>";
 
-
-echo '<h1>Ejercicio 6</h1>';
+// EJERCICIO 6
+echo '<h2>Ejercicio 6</h2>';
 $notas = array(
-    "Miguel" => 5, "Luis" => 7, "Marta" => 10, "Isabel" => 8, "Aitor" => 4, "Pepe" => 1
+    "Miguel" => 5,
+    "Luis" => 7,
+    "Marta" => 10,
+    "Isabel" => 8,
+    "Aitor" => 4,
+    "Pepe" => 1
 );
-
 arsort($notas);
-echo "Notas de los estudiantes:\n";
 foreach ($notas as $nombre => $nota) {
-    echo "$nombre: $nota\n";
+    echo "$nombre: $nota<br>";
 }
-echo '<h1>Ejercicio 7</h1>';
-echo "<p>Media de las notas:</p>";
-$nota = [ "" => 5.85, ];
+echo "<hr>";
 
-foreach ($nota as $nombre => $notas) {
-    echo "$nombre: $notas<br>";
+// EJERCICIO 7
+echo '<h2>Ejercicio 7</h2>';
+$suma = 0;
+foreach ($notas as $nota) {
+    $suma += $nota;
 }
+$media = $suma / count($notas);
+echo "Media de la clase: " . number_format($media, 2) . "<br>";
 
-echo "<p>Alumnos con nota por encima de la media:</p>";
-$medias = [
-    "Marta",  "Isabel",  "Luis", 
-];
-foreach ($medias as $nombre => $media) {
-    echo "$nombre: $media<br>";
-}
-
-
-echo '<h1>Ejercicio 8</h1>';
-
-
-$alumnos = [
-    ["nombre" => "Marta", "nota" => 10],
-    ["nombre" => "Isabel", "nota" => 8],
-    ["nombre" => "Miguel", "nota" => 5],
-    ["nombre" => "Pepe", "nota" => 1],
-    ["nombre" => "Aitor", "nota" => 4],
-    ["nombre" => "Lluis", "nota" => 7],
-];
-
-
-$mejorAlumno = null;
-$notaMaxima = -1;
-
-
-foreach ($alumnos as $alumno) {
-    if ($alumno["nota"] > $notaMaxima) {
-        $notaMaxima = $alumno["nota"];
-        $mejorAlumno = $alumno["nombre"];
+echo "Alumnos con nota por encima de la media:<br>";
+foreach ($notas as $nombre => $nota) {
+    if ($nota > $media) {
+        echo "$nombre: $nota<br>";
     }
 }
+echo "<hr>";
 
+// EJERCICIO 8
+echo '<h2>Ejercicio 8</h2>';
+$mejorAlumno = "";
+$notaMaxima = -1;
 
+foreach ($notas as $nombre => $nota) {
+    if ($nota > $notaMaxima) {
+        $notaMaxima = $nota;
+        $mejorAlumno = $nombre;
+    }
+}
 echo "El mejor alumno es $mejorAlumno con una nota de $notaMaxima.";
+echo "<hr>";
 
-
-echo '<h1>Ejercicio 9</h1>';
+// EJERCICIO 9
+echo '<h2>Ejercicio 9</h2>';
 $inventario = [
-    ["titulo" => "Naruto", "stock" => 10, "precio" => 8.50],
-    ["titulo" => "Spider-Man", "stock" => 5, "precio" => 12.00],
-    ["titulo" => "One Piece", "stock" => 8, "precio" => 9.00],
-    ["titulo" => "Batman", "stock" => 7, "precio" => 11.50]
+    ["titulo" => "Naruto", "stock" => 10, "precio" => 8.50, "idioma" => "japonés"],
+    ["titulo" => "Spider-Man", "stock" => 5, "precio" => 12.00, "idioma" => "inglés"],
+    ["titulo" => "One Piece", "stock" => 8, "precio" => 9.00, "idioma" => "japonés"],
+    ["titulo" => "Batman", "stock" => 7, "precio" => 11.50, "idioma" => "inglés"]
 ];
 
+// Función para calcular el valor del almacén
 function mostrarValorAlmacen($inventario) {
     $valorTotal = 0;
     foreach ($inventario as $comic) {
@@ -109,7 +113,26 @@ function mostrarValorAlmacen($inventario) {
     return $valorTotal;
 }
 
-echo "Valor total del almacén: " . mostrarValorAlmacen($inventario) . "\n";
+// Función para aplicar descuento del 30% si es japonés
+function aplicarDescuentoManga(&$inventario) {
+    foreach ($inventario as &$comic) {
+        if ($comic["idioma"] == "japonés") {
+            $comic["precio"] *= 0.7;
+        }
+    }
+}
+
+// Aplico el descuento
+aplicarDescuentoManga($inventario);
+
+// Muestro valor total del almacén con el descuento aplicado
+echo "Valor total del almacén (descuento aplicado): " . number_format(mostrarValorAlmacen($inventario), 2) . " €<br><br>";
+
+// Muestro los cómics con su nuevo precio
+echo "Cómics tras aplicar el descuento:<br>";
+foreach ($inventario as $comic) {
+    echo $comic["titulo"] . " (" . $comic["idioma"] . ") - Precio: " . number_format($comic["precio"], 2) . " €<br>";
+}
 
 ?>
 
